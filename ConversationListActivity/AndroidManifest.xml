@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shinobicontrols.messageme" >
-<uses-permission android:name="android.permission.WRITE_SMS" />
+
+    <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_MMS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-sdk android:minSdkVersion="11" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.shinobicontrols.messageme.ConversationListActivity"
+            android:name=".ConversationListActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name="com.shinobicontrols.messageme.ConversationDetailActivity"
+            android:name=".ConversationDetailActivity"
             android:label="@string/title_conversation_detail"
-            android:parentActivityName="com.shinobicontrols.messageme.ConversationListActivity" >
+            android:parentActivityName=".ConversationListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shinobicontrols.messageme.ConversationListActivity" />
@@ -32,7 +31,7 @@
 
         <!-- BroadcastReceiver that listens to incoming SMS messages -->
         <receiver
-            android:name="com.shinobicontrols.messageme.receivers.SMSBroadcastReceiver"
+            android:name=".receivers.SMSBroadcastReceiver"
             android:permission="android.permission.BROADCAST_SMS" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_DELIVER" />
@@ -41,23 +40,26 @@
 
         <!-- BroadcastReceiver that listens to incoming MMS messages -->
         <receiver
-            android:name="com.shinobicontrols.messageme.receivers.MMSBroadcastReceiver"
+            android:name=".receivers.MMSBroadcastReceiver"
             android:permission="android.permission.BROADCAST_WAP_PUSH" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+
                 <data android:mimeType="application/vnd.wap.mms-message" />
             </intent-filter>
         </receiver>
 
         <!-- Activity for composing SMS/MMS messages -->
         <activity
-            android:name="com.shinobicontrols.messageme.ComposeSMSActivity"
+            android:name=".ComposeSMSActivity"
             android:label="@string/title_activity_compose_sms" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SENDTO" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
@@ -67,18 +69,30 @@
 
         <!-- Service that delivers messages for "Quick Response" -->
         <service
-            android:name="com.shinobicontrols.messageme.HeadlessSmsSendService"
+            android:name=".HeadlessSmsSendService"
             android:exported="true"
             android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE" >
             <intent-filter>
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
                 <data android:scheme="mmsto" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/title_activity_splash_screen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

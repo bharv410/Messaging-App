@@ -16,11 +16,20 @@ Copyright 2014 Scott Logic Ltd
 
 package com.shinobicontrols.messageme;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.shinobicontrols.messageme.models.StaticVariables;
+
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.support.v4.app.NavUtils;
 import android.telephony.SmsManager;
@@ -29,13 +38,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ComposeSMSActivity extends Activity {
-
+	private static final int CONTACT_PICKER_RESULT = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,10 @@ public class ComposeSMSActivity extends Activity {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+            
+            
+            
+            
         }
         // Enable the 'back' button
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,7 +152,78 @@ public class ComposeSMSActivity extends Activity {
                 View vg = getView().findViewById(R.id.composeNotDefault);
                 vg.setVisibility(View.GONE);
             }
+            
+//            ((ComposeSMSActivity)getActivity()).getContactList();
         }
     }
+    public void doLaunchContactPicker(View view) {
+        
+    	Intent pickContactIntent = new Intent( Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI );
+    	pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+    	startActivityForResult(pickContactIntent, CONTACT_PICKER_RESULT);
+    	
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	String phoneNo = null ;
+    	Uri uri = data.getData();
+    	Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+    	cursor.moveToFirst();
 
-}
+    	int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+    	phoneNo = cursor.getString(phoneIndex);
+    	TextView toField=(TextView)findViewById(R.id.composeEditTextTo);
+    	toField.setText(phoneNo);
+    }
+//    public void getContactList(){
+//    	StaticVariables.contacts=new ArrayList<String>();
+//    	StaticVariables.getPhoneNumber= new HashMap<String,String>();
+//        ContentResolver cr = getContentResolver();
+//        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+//
+//        //Log.i(LOG_TAG, "get Contact List: Fetching complete contact list");
+//
+//        ArrayList<String> contact_names = new ArrayList<String>();
+//
+//        if (cur.getCount() > 0) 
+//        {
+//            while (cur.moveToNext()) 
+//            {
+//                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+//                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+//                if (cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER.trim())).equalsIgnoreCase("1"))
+//                {
+//                    if (name!=null){
+//                        //contact_names[i]=name;
+//
+//                        Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",new String[]{id}, null);
+//                        while (pCur.moveToNext()) 
+//                        {
+//                            String PhoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+//                            PhoneNumber = PhoneNumber.replaceAll("-", "");
+//                            if (PhoneNumber.trim().length() >= 10) {
+//                                PhoneNumber = PhoneNumber.substring(PhoneNumber.length() - 10);
+//                            }
+//                            contact_names.add(name + ":" + PhoneNumber);
+//StaticVariables.contacts.add(name);
+//StaticVariables.getPhoneNumber.put(name, PhoneNumber);
+//                            //i++;
+//                            break;
+//                        }
+//                        pCur.close();
+//                        pCur.deactivate();
+//                        // i++;
+//                    }
+//                }
+//            }
+//            cur.close();
+//            cur.deactivate();
+//        }
+//
+//        String[] contactList = new String[contact_names.size()]; 
+//
+//        for(int j = 0; j < contact_names.size(); j++){
+//            contactList[j] = contact_names.get(j);
+//        }
+
+    }

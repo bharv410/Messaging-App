@@ -33,6 +33,15 @@
                 android:inputType="phone"
                 android:ems="10"
                 android:id="@+id/composeEditTextTo" />
+
+            <Button
+                android:id="@+id/pickContactButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose"
+                android:onClick="doLaunchContactPicker" />
+
         </LinearLayout>
 
         <LinearLayout

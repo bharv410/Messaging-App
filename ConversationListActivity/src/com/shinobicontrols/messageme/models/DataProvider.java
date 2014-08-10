@@ -46,21 +46,15 @@ public class DataProvider extends Observable {
     private DataProvider() {
         // Create the store
         conversationMap = new HashMap<String, Conversation>();
-        conversationList = new ArrayList<Conversation>();
-
-        // Create some sample data
-        addMessage(new Message("content1", "sender1", "recipient", new Date()));
-        addMessage(new Message("content2", "sender1", "recipient", new Date()));
-        addMessage(new Message("content3", "sender2", "recipient", new Date()));
-        addMessage(new Message("content4", "sender3", "recipient", new Date()));
-        addMessage(new Message("content5", "sender4", "recipient", new Date()));
-        addMessage(new Message("content6", "sender4", "recipient", new Date()));
-        addMessage(new Message("content7", "sender4", "recipient", new Date()));
-        addMessage(new Message("content8", "sender4", "recipient", new Date()));
-        addMessage(new Message("content9", "sender4", "recipient", new Date()));
-        
-       
+        conversationList = new ArrayList<Conversation>();  
     }
+
+    
+    
+    //we need to make it so that the users sent
+    //messages are in the same conversation thread
+    //organized by timestamp/
+    
 
     public void addMessage(Message message) {
         if(conversationMap.containsKey(message.getSender())) {
