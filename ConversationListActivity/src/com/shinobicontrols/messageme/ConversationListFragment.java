@@ -16,13 +16,12 @@ Copyright 2014 Scott Logic Ltd
 
 package com.shinobicontrols.messageme;
 
-import android.annotation.SuppressLint;
+import java.util.Observable;
+import java.util.Observer;
+
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Telephony.Sms.Inbox;
 import android.support.v4.app.ListFragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,9 +29,6 @@ import android.widget.ListView;
 import com.shinobicontrols.messageme.models.Conversation;
 import com.shinobicontrols.messageme.models.DataProvider;
 import com.shinobicontrols.messageme.models.StaticVariables;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public class ConversationListFragment extends ListFragment implements Observer {
 	
@@ -51,7 +47,6 @@ public class ConversationListFragment extends ListFragment implements Observer {
     };
     public ConversationListFragment() {
     }
-
     private ArrayAdapter<Conversation> conversationArrayAdapter;
 
     @Override

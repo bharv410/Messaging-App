@@ -36,6 +36,7 @@ ProgressBar pb;
         @Override
         protected Void doInBackground(Void... arg0) {
         	StaticVariables.convos=DataProvider.getInstance().getConversations(SplashScreen.this);
+        	StaticVariables.getContactList(getApplicationContext());
             return null;
         }
  

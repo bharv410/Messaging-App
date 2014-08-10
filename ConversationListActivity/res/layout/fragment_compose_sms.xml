@@ -2,109 +2,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.shinobicontrols.messageme.ComposeSMSActivity$PlaceholderFragment">
+    tools:context="com.shinobicontrols.messageme.ComposeSMSActivity$PlaceholderFragment" >
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:orientation="vertical" >
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/compose_to"
                 android:id="@+id/textView"
-                android:layout_gravity="center_vertical" />
-
-            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:ems="10"
-                android:id="@+id/composeEditTextTo" />
+                android:layout_gravity="center_vertical"
+                android:text="@string/compose_to" />
+
+            <AutoCompleteTextView
+                android:id="@+id/composeEditTextTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:hint="Enter name or #" >
+            </AutoCompleteTextView>
 
             <Button
                 android:id="@+id/pickContactButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose"
-                android:onClick="doLaunchContactPicker" />
-
+                android:onClick="doLaunchContactPicker"
+                android:text="Choose" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/compose_message"
-                android:id="@+id/textView2"
-                android:layout_gravity="center_vertical" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/composeEditTextMessage"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/compose_cancel"
-                android:id="@+id/composeButtonCancel" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/compose_send"
-                android:id="@+id/composeButtonSend" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:id="@+id/composeNotDefault"
-            android:visibility="invisible">
+            android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/compose_not_default"
-                android:id="@id/composeNotDefault" />
+                android:layout_gravity="center_vertical"
+                android:text="@string/compose_message" />
 
-            <Button
+            <EditText
+                android:id="@+id/composeEditTextMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/compose_set_default"
-                android:id="@+id/composeButtonSetDefault" />
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
+            <Button
+                android:id="@+id/composeButtonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compose_cancel" />
+
+            <Button
+                android:id="@+id/composeButtonSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compose_send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/composeNotDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:visibility="invisible" >
+
+            <TextView
+                android:id="@id/composeNotDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compose_not_default"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/composeButtonSetDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compose_set_default" />
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

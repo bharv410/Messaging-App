@@ -19,6 +19,8 @@ package com.shinobicontrols.messageme.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.Toast;
+
 /**
  * Created by sdavies on 09/01/2014.
  */
@@ -40,17 +42,19 @@ public class Conversation {
     public List<Message> getMessages() {
         return messages;
     }
-
     public String getSender() {
         return sender;
     }
-
     public void addMessage(Message message) {
         this.messages.add(message);
     }
-
     @Override
     public String toString() {
-        return sender;
+//    	if(StaticVariables.getContactName!=null&&StaticVariables.getContactName.containsKey(sender.replaceAll("[^0-9]+", "")
+//    			)){
+//    		Toast.makeText(context, text, duration)
+//    		return StaticVariables.getContactName.get(sender);
+//    	}
+    		return sender;	
     }
 }

@@ -38,6 +38,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,11 +57,7 @@ public class ComposeSMSActivity extends Activity {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-            
-            
-            
-            
-        }
+          }
         // Enable the 'back' button
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -112,7 +112,16 @@ public class ComposeSMSActivity extends Activity {
                 public void onClick(View v) {
                 	TextView toField=(TextView)rootView.findViewById(R.id.composeEditTextTo);
                 	TextView messageField=(TextView)rootView.findViewById(R.id.composeEditTextMessage);
+                	
+                	
                     String recipient = (toField).getText().toString();
+                    
+//                    	if(StaticVariables.getPhoneNumber.containsKey(recipient)){
+//                    		toField.setText(StaticVariables.getPhoneNumber.get(recipient));
+//                    	}
+//                    
+                    
+                    
                     String message   = (messageField).getText().toString();
 
                     SmsManager smsManager = SmsManager.getDefault();
@@ -153,7 +162,17 @@ public class ComposeSMSActivity extends Activity {
                 vg.setVisibility(View.GONE);
             }
             
-//            ((ComposeSMSActivity)getActivity()).getContactList();
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_dropdown_item_1line,StaticVariables.contacts);
+            AutoCompleteTextView acTextView = (AutoCompleteTextView)getActivity().findViewById(R.id.composeEditTextTo);
+            acTextView.setAdapter(adapter);
+            acTextView.setOnItemClickListener(new OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                        long id) {
+                      Toast.makeText(getActivity(),adapter.getItem(pos), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
     public void doLaunchContactPicker(View view) {
@@ -175,55 +194,5 @@ public class ComposeSMSActivity extends Activity {
     	TextView toField=(TextView)findViewById(R.id.composeEditTextTo);
     	toField.setText(phoneNo.replaceAll("[^0-9]",""));
     }
-//    public void getContactList(){
-//    	StaticVariables.contacts=new ArrayList<String>();
-//    	StaticVariables.getPhoneNumber= new HashMap<String,String>();
-//        ContentResolver cr = getContentResolver();
-//        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-//
-//        //Log.i(LOG_TAG, "get Contact List: Fetching complete contact list");
-//
-//        ArrayList<String> contact_names = new ArrayList<String>();
-//
-//        if (cur.getCount() > 0) 
-//        {
-//            while (cur.moveToNext()) 
-//            {
-//                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-//                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//                if (cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER.trim())).equalsIgnoreCase("1"))
-//                {
-//                    if (name!=null){
-//                        //contact_names[i]=name;
-//
-//                        Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",new String[]{id}, null);
-//                        while (pCur.moveToNext()) 
-//                        {
-//                            String PhoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                            PhoneNumber = PhoneNumber.replaceAll("-", "");
-//                            if (PhoneNumber.trim().length() >= 10) {
-//                                PhoneNumber = PhoneNumber.substring(PhoneNumber.length() - 10);
-//                            }
-//                            contact_names.add(name + ":" + PhoneNumber);
-//StaticVariables.contacts.add(name);
-//StaticVariables.getPhoneNumber.put(name, PhoneNumber);
-//                            //i++;
-//                            break;
-//                        }
-//                        pCur.close();
-//                        pCur.deactivate();
-//                        // i++;
-//                    }
-//                }
-//            }
-//            cur.close();
-//            cur.deactivate();
-//        }
-//
-//        String[] contactList = new String[contact_names.size()]; 
-//
-//        for(int j = 0; j < contact_names.size(); j++){
-//            contactList[j] = contact_names.get(j);
-//        }
-
+    
     }
