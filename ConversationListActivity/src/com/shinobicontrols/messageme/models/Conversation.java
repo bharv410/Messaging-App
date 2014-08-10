@@ -18,8 +18,7 @@ package com.shinobicontrols.messageme.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.widget.Toast;
+import java.util.Map;
 
 /**
  * Created by sdavies on 09/01/2014.
@@ -50,10 +49,39 @@ public class Conversation {
     }
     @Override
     public String toString() {
-//    	if(StaticVariables.getContactName!=null&&StaticVariables.getContactName.containsKey(sender.replaceAll("[^0-9]+", "")
-//    			)){
-//    		Toast.makeText(context, text, duration)
-//    		return StaticVariables.getContactName.get(sender);
+//    	if(StaticVariables.getContactName!=null){
+//    		System.out.println("not null");
+//    		System.out.println("not null");
+//    		System.out.println("not null");
+//    		System.out.println("not null");
+//    		
+//    		if(StaticVariables.getContactName.containsKey(sender.replaceAll("[^0-9]+", ""))){
+//    			System.out.println("contains it");
+//    			return StaticVariables.getContactName.get(sender);
+//    		}else{
+//    			System.out.println(sender);
+//    			System.out.println(sender.replaceAll("[^0-9]+", ""));
+//    		}
+//    		
+//    		for (Map.Entry<String, String> entry : StaticVariables.getContactName.entrySet()) {
+//    		    String key = entry.getKey();
+//    		    String value = entry.getValue();
+//    		    System.out.println("----Contact name"+key+"#:"+value);
+//    		    // ...
+//    		}
+//    		
+//    		for (Map.Entry<String, String> entry : StaticVariables.getPhoneNumber.entrySet()) {
+//    		    String key = entry.getKey();
+//    		    String value = entry.getValue();
+//    		    System.out.println("# "+key+"Contact Name:"+value);
+//    		    // ...
+//    		}
+//    		
+//    	}else{
+//    		System.out.println("IS null");
+//    		System.out.println("IS null");
+//    		System.out.println("IS null");
+//    		System.out.println("IS null");
 //    	}
     		return sender;	
     }

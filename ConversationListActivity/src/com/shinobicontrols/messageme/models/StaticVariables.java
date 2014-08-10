@@ -20,6 +20,7 @@ public StaticVariables(){
 public static void getContactList(Context ctx){
     	StaticVariables.contacts=new ArrayList<String>();
     	StaticVariables.getPhoneNumber= new HashMap<String,String>();
+    	StaticVariables.getContactName= new HashMap<String,String>();
         ContentResolver cr = ctx.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 
@@ -42,13 +43,12 @@ public static void getContactList(Context ctx){
                         while (pCur.moveToNext()) 
                         {
                             String PhoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                            PhoneNumber = PhoneNumber.replaceAll("-", "");
-                            if (PhoneNumber.trim().length() >= 10) {
-                                PhoneNumber = PhoneNumber.substring(PhoneNumber.length() - 10);
-                            }
+                            PhoneNumber = PhoneNumber.replaceAll("[^0-9]+", "");
+                            
                             contact_names.add(name + ":" + PhoneNumber);
 StaticVariables.contacts.add(name);
 StaticVariables.getPhoneNumber.put(name, PhoneNumber);
+StaticVariables.getContactName.put(PhoneNumber,name);
                             //i++;
                             break;
                         }

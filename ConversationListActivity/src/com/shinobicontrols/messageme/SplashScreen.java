@@ -46,7 +46,6 @@ ProgressBar pb;
             pb.setVisibility(ProgressBar.INVISIBLE);
             Intent i = new Intent(SplashScreen.this, ConversationListActivity.class);
             startActivity(i);
- 
             // close this activity
             finish();
         }
