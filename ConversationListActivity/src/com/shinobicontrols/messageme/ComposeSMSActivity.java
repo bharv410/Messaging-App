@@ -173,7 +173,7 @@ public class ComposeSMSActivity extends Activity {
     	int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
     	phoneNo = cursor.getString(phoneIndex);
     	TextView toField=(TextView)findViewById(R.id.composeEditTextTo);
-    	toField.setText(phoneNo);
+    	toField.setText(phoneNo.replaceAll("[^0-9]",""));
     }
 //    public void getContactList(){
 //    	StaticVariables.contacts=new ArrayList<String>();
